@@ -12,4 +12,4 @@ CREATE TABLE IF NOT EXISTS books (
 INSERT INTO books (title, author, img_url) VALUES ('The Gruffalo', 'Julia Donaldson', './static/gruffalo.jpeg');
 INSERT INTO books (title, author, img_url) VALUES ('Ada Twist, Scientist', 'Andrea Beaty', './static/ada_twist.jpeg');
 INSERT INTO books (title, author, img_url) VALUES ('The Girl Who Drank the Moon', 'Kelly Barnhill', './static/girl_drank_moon.jpg');
-INSERT INTO books (title, author, img_url) VALUES ('Dragons in a Bag', 'Zetta Elliott', './static/dragons_in_a_bag.jpg');
+INSERT INTO books (title, author, img_url) VALUES ('Dragons in a Bag', 'Zetta Elliott', './static/dragons_in_a_bag.jpg'); 
