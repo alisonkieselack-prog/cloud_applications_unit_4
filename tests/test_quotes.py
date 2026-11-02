@@ -5,3 +5,4 @@ def test_quotes_page_has_title(page: Page):
 
     title = page.locator("h1")
     expect(title).to_have_text("Inspiring Quotes")
+    
