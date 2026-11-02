@@ -1,0 +1,60 @@
+<head>
+    <title>My favourite books</title>
+    <link rel="stylesheet" href="/static/styles.css">
+</head>
+
+<nav class="menu">
+  <ol>
+    <li class="menu"><a href="/books">Books</a></li>
+    <li class="menu"><a href="/authors">Authors</a></li>
+    <li class="menu"><a href="/">Store (Coming Soon)</a></li>
+  </ol>
+</nav>
+
+<center>
+    
+<header><h1>Welcome to AliReads</h1></header>
+
+<main><p>This is a collection of my favourite books and authors.
+    <br>
+    Have a browse using the above navigation to see what books and authors I enjoy.
+</p></main>
+
+<fieldset>
+  <legend>Choose your favorite book</legend>
+
+  <input type="radio" id="gruffalo" name="book" value="G" />
+  <label for="kraken">The Gruffalo</label><br />
+
+  <input type="radio" id="adatwist" name="book" value="A" />
+  <label for="sasquatch">Ada Twist, Scientist</label><br />
+
+  <input type="radio" id="thegirl name="book" value="T" />
+  <label for="mothman">The Girl Who Drank the Moon</label><br />
+
+  <input type="radio" id="dragons" name="book" value="T" />
+  <label for="mothman">Dragons in a Bag</label>
+</fieldset>
+
+<br><br>
+
+<label for="author-select">Choose your favourite author:</label>
+<select id="author-select">
+  <optgroup label="Authors">
+    <option>Julia Donaldson</option>
+    <option>Andrea Beaty</option>
+    <option>Kelly Barnhill</option>
+    <option>Zetta Elliott</option>
+  </optgroup>
+</select>
+
+<br><br>
+
+<picture>
+  <img src="static/gruffalo.jpeg" alt="The Gruffalo" />
+</picture>
+
+<br><br>
+
+<footer>Copyright Alison Kieselack 2026</footer>
+</center>

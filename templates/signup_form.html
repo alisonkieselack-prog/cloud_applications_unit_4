@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign-up Form</title>
+    <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+    <h1>Sign up below</h1>
+    <section>
+<h3>Complete this form to become a member of AliBooks:</h3>
+    <form class="book_submit" method="POST" action="/users/new">
+        <label for="title">Username</label><br>
+        <input type="text" name="username" placeholder="Create a username here"><br><br>
+        <label for="author">Password</label><br>
+        <input type="text" name="password" placeholder="Create a password here"><br><br>
+        <button type="submit">Sign up</button>
+    </form>
+</section>
+</body>
+</html>

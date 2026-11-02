@@ -1,0 +1,32 @@
+<html>
+<head>
+    <title>My favourite books</title>
+    <link rel="stylesheet" href="/static/styles.css">
+</head>
+
+<header><h1>My favourite books</h1></header>
+
+<main>
+<section class="books">
+  {% for book in books %}
+    <article class="book_item">
+        <img src='{{ book.img_url }}'>
+        <h2>{{ book.title }}</h2>
+        <p>{{ book.author }}</p>
+    </article>
+  {% endfor %}
+</section>
+
+<br><br>
+<section>
+<h3>Submit your own favourite book below:</h3>
+    <form class="book_submit" method="POST" action="/books">
+        <label for="title">Title</label><br>
+        <input type="text" name="title" placeholder="Type book title here"><br><br>
+        <label for="author">Author</label><br>
+        <input type="text" name="author" placeholder="Type author here"><br><br>
+        <input type="submit" value="Submit">
+    </form>
+</section>
+</main>
+</html>
