@@ -10,4 +10,13 @@ class UserRepository:
             )
         return None
 
+    def find_by_username(self, username):
+        rows = self._connection.execute(
+            "SELECT * FROM users WHERE username = %s", [username]
+            )
+        if rows != []:
+            row = rows[0]
+            return User(row["username"], row["password"], row["id"])
+
+
 

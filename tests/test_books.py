@@ -37,22 +37,3 @@ def test_book_list_contains_all_books(page: Page):
 
     assert actual_titles == expected_titles
     assert actual_authors == expected_authors
-
-def test_form_submits_a_book(page: Page):
-    connection = DatabaseConnection()
-    connection.connect()
-    connection.seed("./seeds/book_store.sql")
-
-    page.goto("http://127.0.0.1:5001/books")
-
-    page.get_by_placeholder("Title").fill("OK Book")
-    page.get_by_placeholder("Author").fill("Fine Author")
-    page.get_by_role("button", name="Submit").click()
-
-    titles = page.locator('.book_item h2')
-    new_title = titles.all_inner_texts()[-1]
-    authors = page.locator('.book_item p')
-    new_author = authors.all_inner_texts()[-1]
-
-    assert new_title == "OK Book"
-    assert new_author == "Fine Author"

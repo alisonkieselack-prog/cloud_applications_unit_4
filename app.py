@@ -1,12 +1,16 @@
-from flask import Flask, render_template, request, redirect
+from flask import Flask, render_template, request, redirect, session
 from database_connection import DatabaseConnection
 from book_repository import BookRepository
 from book import Book
 from user_repository import *
 from user import *
+from authenticated import *
+from login_required import *
 
 # instantiate a Flask app object
 app = Flask(__name__)
+
+app.secret_key = "extremely_secret_key"
 
 # Declares a route that listens for a GET request to the path /hello
 # and a method to execute when that request comes in
@@ -20,25 +24,26 @@ def hello():
 
 @app.route('/books', methods=['GET'])
 def get_all_books():
-  connection = DatabaseConnection()
-  connection.connect()
-  book_repository = BookRepository(connection)
-  books = book_repository.all()
-  print(books)
-  return render_template("books.html", books=books)
+    connection = DatabaseConnection()
+    connection.connect()
+    book_repository = BookRepository(connection)
+    books = book_repository.all()
+    print(books)
+    return render_template("books.html", books=books)
 
 @app.route('/books', methods=['POST'])
+@login_required
 def create_book():
-  connection = DatabaseConnection()
-  connection.connect()
+    connection = DatabaseConnection()
+    connection.connect()
 
-  book_repository = BookRepository(connection)
+    book_repository = BookRepository(connection)
 
-  book_details = request.form
-  book = Book(None, book_details['title'], book_details['author'], "")
-  book_repository.create(book)
+    book_details = request.form
+    book = Book(None, book_details['title'], book_details['author'], "")
+    book_repository.create(book)
 
-  return redirect("/books")
+    return redirect("/books")
 
 @app.route('/users/new', methods=["GET"])
 def get_signup_form():
@@ -46,13 +51,35 @@ def get_signup_form():
 
 @app.route('/users/new', methods=["POST"])
 def create_user():
-  connection = DatabaseConnection()
-  connection.connect()
-  user_repository = UserRepository(connection)
-  user_details = request.form
-  user = User(username=user_details["username"], password=user_details["password"])
-  user_repository.create(user)
-  return redirect("/users/new")
+    connection = DatabaseConnection()
+    connection.connect()
+    user_repository = UserRepository(connection)
+    user_details = request.form
+    user = User(username=user_details["username"], password=user_details["password"])
+    user_repository.create(user)
+    return redirect("/users/new")
+
+@app.route('/sessions/new', methods=['GET'])
+def get_login_form():
+    return render_template("login_form.html")
+
+@app.route('/sessions/new', methods=['POST'])
+def create_session():
+    connection = DatabaseConnection()
+    connection.connect()
+    user_repository = UserRepository(connection)
+
+    username = request.form["username"]
+    password = request.form["password"]
+
+    user = user_repository.find_by_username(username)
+
+    if user and user.password == password:
+        session['user_id'] = user.id
+        session['username'] = user.username
+        return redirect('/books')
+    else:
+        return redirect('/sessions/new')
 
 @app.route('/authors', methods=['GET'])
 def get_authors():
