@@ -1,15 +1,12 @@
 name: Deploy to EC2
 
 on:
-  workflow_run:
-    workflows: ["Continuous Integration"]
-    types:
-      - completed
-    branches: [ main ]
+  push:
+    branches:
+      - main
 
 jobs:
   build-and-deploy:
-    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     runs-on: ubuntu-latest
     environment: prod
 
@@ -55,7 +52,8 @@ jobs:
                 -e POSTGRES_PASSWORD='${{ secrets.POSTGRES_PASSWORD }}' \
                 -e POSTGRES_DB='book_store' \
                 -d postgres:17
-              docker exec -i book_store_db psql -U postgres -d book_store < ~/book_store/seeds/books.sql
+              docker exec -i book_store_db psql -U postgres -d book_store < ~/book_store/seeds/book_store.sql
+              docker exec -i book_store_db psql -U postgres -d book_store < ~/book_store/seeds/users.sql
             fi
 
       - name: Build Docker image
