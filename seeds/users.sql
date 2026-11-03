@@ -8,4 +8,4 @@ CREATE TABLE users (
   password VARCHAR(255) NOT NULL
 );
 
-INSERT INTO users (username, password) VALUES ('test_username', 'test_password');
+-- INSERT INTO users (username, password) VALUES ('test_username', 'test_password');

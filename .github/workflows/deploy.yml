@@ -55,7 +55,8 @@ jobs:
                 -e POSTGRES_PASSWORD='${{ secrets.POSTGRES_PASSWORD }}' \
                 -e POSTGRES_DB='book_store' \
                 -d postgres:17
-              docker exec -i book_store_db psql -U postgres -d book_store < ~/book_store/seeds/books.sql
+              docker exec -i book_store_db psql -U postgres -d book_store < ~/book_store/seeds/book_store.sql
+              docker exec -i book_store_db psql -U postgres -d book_store < ~/book_store/seeds/users.sql
             fi
 
       - name: Build Docker image
