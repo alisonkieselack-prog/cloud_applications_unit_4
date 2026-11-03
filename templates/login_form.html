@@ -6,8 +6,21 @@
     <title>Sign-up Form</title>
     <link rel="stylesheet" href="/static/styles.css">
 </head>
+
+{% include 'header.html' %}
+
+{% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+        {% for category, message in messages %}
+            <div class="alert alert-{{ category }}">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endif %}
+{% endwith %}
+
 <body>
-    <h1>Log in below</h1>
+    <header><h1>Log in below</h1></header>
     <section>
 <h3>Log in to access your AliBooks account:</h3>
     <form class="book_submit" method="POST" action="/sessions/new">
