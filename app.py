@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, session
+from flask import Flask, render_template, request, redirect, session, flash 
 from database_connection import DatabaseConnection
 from book_repository import BookRepository
 from book import Book
@@ -28,10 +28,13 @@ def get_all_books():
     connection.connect()
     book_repository = BookRepository(connection)
     books = book_repository.all()
-    print(books)
     return render_template("books.html", books=books)
 
-@app.route('/books', methods=['POST'])
+@app.route('/add_book', methods=['GET'])
+def get_book_form():
+    return render_template("add_book_form.html")
+
+@app.route('/add_book', methods=['POST'])
 @login_required
 def create_book():
     connection = DatabaseConnection()
@@ -42,8 +45,8 @@ def create_book():
     book_details = request.form
     book = Book(None, book_details['title'], book_details['author'], "")
     book_repository.create(book)
-
-    return redirect("/books")
+    flash('Book successfully submitted!', 'success')
+    return redirect("/add_book")
 
 @app.route('/users/new', methods=["GET"])
 def get_signup_form():

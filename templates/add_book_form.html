@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/styles.css">
+    <title>Add a book</title>
+</head>
+
+{% include 'header.html' %}
+
+{% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+        {% for category, message in messages %}
+            <div class="alert alert-{{ category }}">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endif %}
+{% endwith %}
+
+<body>
+    <header><h1>Add a book</h1></header>
+    <section>
+<h3>Submit your own favourite book below:</h3>
+    <form class="book_submit" method="POST" action="/add_book">
+        <label for="title">Title</label><br>
+        <input type="text" name="title" placeholder="Type book title here"><br><br>
+        <label for="author">Author</label><br>
+        <input type="text" name="author" placeholder="Type author here"><br><br>
+        <input type="submit" value="Submit">
+    </form>
+</section>
+</body>
+</html>

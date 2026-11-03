@@ -6,10 +6,13 @@
     <title>Sign-up Form</title>
     <link rel="stylesheet" href="/static/styles.css">
 </head>
+
+{% include 'header.html' %}
+
 <body>
-    <h1>Sign up below</h1>
+    <header><h1>Sign up below</h1></header>
     <section>
-<h3>Complete this form to become a member of AliBooks:</h3>
+<h3>Sign up to gain exclusive behind the scenes access to the AliReads library:</h3>
     <form class="book_submit" method="POST" action="/users/new">
         <label for="username">Username</label><br>
         <input type="text" name="username" placeholder="Create a username here"><br><br>

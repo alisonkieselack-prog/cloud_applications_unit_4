@@ -1,5 +1,4 @@
 
-/* ===== General page styling ===== */
 * {
     box-sizing: border-box;
 }
@@ -13,7 +12,6 @@ body {
     line-height: 1.7;
 }
 
-/* ===== Navigation menu ===== */
 nav.menu {
     background-color: #294936;
     padding: 15px 30px;
@@ -39,16 +37,20 @@ nav.menu a {
     transition: background-color 0.3s ease;
 }
 
+.auth-link a:hover {
+  background-color: #70a576;
+}
+
 nav.menu a:hover {
     background-color: #42684d;
 }
 
-/* ===== Main heading ===== */
 header {
     background: linear-gradient(135deg, #294936, #527858);
     color: #fffaf0;
     padding: 55px 20px;
     margin-bottom: 30px;
+    text-align: center;
 }
 
 h1 {
@@ -315,4 +317,49 @@ body:has(main ul) main > ul > li > ul > li::before {
   display: grid;
   grid: 200px / 50% 50%;
   gap: 50px;
+}
+
+.auth-link:first-of-type {
+  margin-left: auto;
+}
+
+.auth-link a {
+  background-color: #366545;
+  color: white;
+  padding: 8px 16px;
+  border-radius: 5px;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.auth-link a:hover {
+  background-color: #70a576;
+}
+
+.alert-success {
+    background-color: #d4edda;
+    color: #155724;
+    padding: 15px;
+    border: 1px solid #c3e6cb;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+
+.alert-fail {
+    background-color: #f8d7da;
+    color: #721c24;
+    padding: 15px;
+    border: 1px solid #f5c6cb;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+
+.auth-link:first-of-type a {
+  background-color: #051f03;
+  color: white;
+}
+
+.auth-link:last-of-type a {
+  border: 1px solid #051f03;
+  color: ##051f03;
 }
