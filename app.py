@@ -56,11 +56,26 @@ def get_signup_form():
 def create_user():
     connection = DatabaseConnection()
     connection.connect()
+
     user_repository = UserRepository(connection)
     user_details = request.form
-    user = User(username=user_details["username"], password=user_details["password"])
-    user_repository.create(user)
-    return redirect("/users/new")
+    username = user_details["username"]
+
+    existing_user = user_repository.find_by_username(username)
+
+    if existing_user:
+        flash('Username already exists. Try logging in instead.', 'fail')
+        return redirect("/sessions/new")
+
+    else:
+        new_user = User(username=user_details["username"], password=user_details["password"])
+        user_repository.create(new_user)
+        username = user_details["username"]
+        user = user_repository.find_by_username(username)
+        session['user_id'] = user.id
+        session['username'] = user.username
+        flash('Sign up successful!', 'success')
+        return redirect("/")
 
 @app.route('/sessions/new', methods=['GET'])
 def get_login_form():
@@ -82,6 +97,7 @@ def create_session():
         session['username'] = user.username
         return redirect('/books')
     else:
+        flash('Incorrect username or password, please try again.', 'fail')
         return redirect('/sessions/new')
 
 @app.route('/authors', methods=['GET'])

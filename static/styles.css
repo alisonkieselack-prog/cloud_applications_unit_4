@@ -12,6 +12,8 @@ body {
     line-height: 1.7;
 }
 
+/* nav */
+
 nav.menu {
     background-color: #294936;
     padding: 15px 30px;
@@ -28,21 +30,35 @@ nav.menu ol {
 }
 
 nav.menu a {
-    color: #fffaf0;
     text-decoration: none;
     font-size: 1.05rem;
     font-weight: 600;
     padding: 8px 14px;
+}
+
+.nav-links a {
+    color: #fffaf0;
     border-radius: 8px;
     transition: background-color 0.3s ease;
 }
 
-.auth-link a:hover {
-  background-color: #70a576;
+.nav-links a:hover {
+    background-color: #527858;
 }
 
-nav.menu a:hover {
-    background-color: #42684d;
+.auth-links a {
+    color: #fffaf0;
+    padding: 8px 16px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+    background-color: #366545;
+    color: white;
+    margin-left: auto;
+}
+
+.auth-links a:hover {
+    background-color: #c95a15;
 }
 
 header {
@@ -134,7 +150,7 @@ select:focus {
     border-color: #42684d;
 }
 
-/* ===== Book image ===== */
+/* ===== Front page image ===== */
 picture {
     display: block;
     margin: 35px auto;
@@ -164,34 +180,6 @@ footer {
     background-color: #294936;
     color: #fffaf0;
     font-size: 0.9rem;
-}
-
-/* ===== Mobile-friendly layout ===== */
-@media (max-width: 600px) {
-    nav.menu {
-        padding: 15px;
-    }
-
-    nav.menu ol {
-        gap: 15px;
-    }
-
-    header {
-        padding: 40px 15px;
-    }
-
-    main {
-        padding: 0 20px;
-    }
-
-    fieldset {
-        margin: 0 15px;
-        padding: 20px;
-    }
-
-    footer {
-        margin-top: 30px;
-    }
 }
 
 /* ===== Favourite books page ===== */
@@ -228,65 +216,6 @@ body:has(main ul) main > ul {
     padding: 0;
 }
 
-/* Individual book titles */
-body:has(main ul) main > ul > li {
-    background-color: #fffdf8;
-    border-left: 5px solid #42684d;
-    border-radius: 10px;
-    margin-bottom: 22px;
-    padding: 20px 25px;
-    font-family: Georgia, "Times New Roman", serif;
-    font-size: 1.3rem;
-    font-weight: bold;
-    color: #294936;
-    box-shadow: 0 4px 12px rgba(49, 62, 43, 0.08);
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-/* Hover effect for book cards */
-body:has(main ul) main > ul > li:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 7px 18px rgba(49, 62, 43, 0.14);
-}
-
-/* Author names */
-body:has(main ul) main > ul > li > ul {
-    list-style: none;
-    margin: 10px 0 0;
-    padding: 10px 0 0;
-    border-top: 1px solid #e8e2d5;
-}
-
-body:has(main ul) main > ul > li > ul > li {
-    font-family: "Segoe UI", Arial, sans-serif;
-    font-size: 1rem;
-    font-weight: normal;
-    color: #697564;
-}
-
-/* Add a small decorative label before each author */
-body:has(main ul) main > ul > li > ul > li::before {
-    content: "✍ ";
-    color: #527858;
-}
-
-/* Mobile-friendly layout */
-@media (max-width: 600px) {
-    body:has(main ul) header {
-        padding: 30px 15px;
-    }
-
-    body:has(main ul) main {
-        margin: 25px auto;
-        padding: 0 15px;
-    }
-
-    body:has(main ul) main > ul > li {
-        padding: 16px 18px;
-        font-size: 1.15rem;
-    }
-}
-
 .book_item {
   display: flex;
   align-items: center;
@@ -319,23 +248,6 @@ body:has(main ul) main > ul > li > ul > li::before {
   gap: 50px;
 }
 
-.auth-link:first-of-type {
-  margin-left: auto;
-}
-
-.auth-link a {
-  background-color: #366545;
-  color: white;
-  padding: 8px 16px;
-  border-radius: 5px;
-  text-decoration: none;
-  font-weight: bold;
-}
-
-.auth-link a:hover {
-  background-color: #70a576;
-}
-
 .alert-success {
     background-color: #d4edda;
     color: #155724;
@@ -352,14 +264,4 @@ body:has(main ul) main > ul > li > ul > li::before {
     border: 1px solid #f5c6cb;
     border-radius: 5px;
     margin-bottom: 20px;
-}
-
-.auth-link:first-of-type a {
-  background-color: #051f03;
-  color: white;
-}
-
-.auth-link:last-of-type a {
-  border: 1px solid #051f03;
-  color: ##051f03;
 }
