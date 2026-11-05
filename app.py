@@ -6,6 +6,15 @@ from user_repository import *
 from user import *
 from authenticated import *
 from login_required import *
+from flagsmith import Flagsmith
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
+
+flagsmith = Flagsmith(
+    environment_key = os.getenv("FLAGSMITH_KEY")
+)
 
 # instantiate a Flask app object
 app = Flask(__name__)
@@ -56,11 +65,26 @@ def get_signup_form():
 def create_user():
     connection = DatabaseConnection()
     connection.connect()
+
     user_repository = UserRepository(connection)
     user_details = request.form
-    user = User(username=user_details["username"], password=user_details["password"])
-    user_repository.create(user)
-    return redirect("/users/new")
+    username = user_details["username"]
+
+    existing_user = user_repository.find_by_username(username)
+
+    if existing_user:
+        flash('Username already exists. Try logging in instead.', 'fail')
+        return redirect("/sessions/new")
+
+    else:
+        new_user = User(username=user_details["username"], password=user_details["password"])
+        user_repository.create(new_user)
+        username = user_details["username"]
+        user = user_repository.find_by_username(username)
+        session['user_id'] = user.id
+        session['username'] = user.username
+        flash('Sign up successful!', 'success')
+        return redirect("/")
 
 @app.route('/sessions/new', methods=['GET'])
 def get_login_form():
@@ -82,6 +106,7 @@ def create_session():
         session['username'] = user.username
         return redirect('/books')
     else:
+        flash('Incorrect username or password, please try again.', 'fail')
         return redirect('/sessions/new')
 
 @app.route('/authors', methods=['GET'])
@@ -112,8 +137,12 @@ def index():
 
 @app.route('/team', methods=['GET'])
 def get_team():
-    team = ["Alison", "Charlie", "Jon", "Danesh", "Syed", "Ben Meads"]
-    return render_template("team.html", team=team)
+    flags = flagsmith.get_environment_flags()
+    if flags.is_feature_enabled("new_page"):
+        return render_template("team_v2.html")
+    else:
+        team = ["Alison", "Charlie", "Jon", "Danesh", "Syed", "Ben Meads"]
+        return render_template("team.html", team=team)
 
 @app.route('/quotes', methods=["GET"])
 def get_quotes():
@@ -144,6 +173,14 @@ def get_quotes():
 @app.route('/quoteshtml', methods=["GET"])
 def get_quoteshtml():
     return render_template("quotes.html")
+
+@app.route('/books/<int:book_id>', methods=['GET'])
+def get_individual_book(book_id):
+    connection = DatabaseConnection()
+    connection.connect()
+    book_repo = BookRepository(connection)
+    book = book_repo.find(book_id)
+    return render_template('book.html', book=book)
 
 # make the server run in response to `python app.py`
 # on port 5001 (you'll learn more about what this means later)

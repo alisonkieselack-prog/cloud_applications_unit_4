@@ -15,9 +15,11 @@
   <section class="books">
     {% for book in books %}
       <article class="book_item">
-          <img src='{{ book.img_url }}'>
-          <h2>{{ book.title }}</h2>
-          <p>{{ book.author }}</p>
+          <a href="/books/{{ book.id }}">
+            <img src='{{ book.img_url }}'>
+            <h2>{{ book.title }}</h2>
+            <p><i>by {{ book.author }}</i></p>
+          </a>
       </article>
     {% endfor %}
   </section>

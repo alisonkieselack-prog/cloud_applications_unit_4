@@ -11,6 +11,9 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
+    environment: prod
+    env: 
+      FLAGSMITH_KEY: ${{ secrets.FLAGSMITH_KEY }}
 
     services:
       postgres:

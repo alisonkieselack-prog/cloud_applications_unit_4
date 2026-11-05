@@ -9,8 +9,17 @@
 
 {% include 'header.html' %}
 
+{% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+        {% for category, message in messages %}
+            <div class="alert alert-{{ category }}">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endif %}
+{% endwith %}
+
 <body>
-    <header><h1>Sign up below</h1></header>
     <section>
 <h3>Sign up to gain exclusive behind the scenes access to the AliReads library:</h3>
     <form class="book_submit" method="POST" action="/users/new">
