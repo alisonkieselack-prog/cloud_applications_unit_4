@@ -6,6 +6,12 @@ from user_repository import *
 from user import *
 from authenticated import *
 from login_required import *
+from flagsmith import Flagsmith
+import os
+
+flagsmith = Flagsmith(
+    environment_key = os.getenv("FLAGSMITH_KEY")
+)
 
 # instantiate a Flask app object
 app = Flask(__name__)
@@ -128,8 +134,12 @@ def index():
 
 @app.route('/team', methods=['GET'])
 def get_team():
-    team = ["Alison", "Charlie", "Jon", "Danesh", "Syed", "Ben Meads"]
-    return render_template("team.html", team=team)
+    flags = flagsmith.get_environment_flags()
+    if flags.is_feature_enabled("new_page"):
+        return render_template("team_v2.html")
+    else:
+        team = ["Alison", "Charlie", "Jon", "Danesh", "Syed", "Ben Meads"]
+        return render_template("team.html", team=team)
 
 @app.route('/quotes', methods=["GET"])
 def get_quotes():
