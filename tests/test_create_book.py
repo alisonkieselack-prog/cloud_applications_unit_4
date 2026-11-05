@@ -47,7 +47,7 @@ def test_form_submits_a_book(page: Page):
     new_author = authors.all_inner_texts()[-1]
 
     assert new_title == "OK Book"
-    assert new_author == "Fine Author"
+    assert new_author == "by Fine Author"
 
 def test_create_book_is_saved_to_database():
     client = app.test_client()

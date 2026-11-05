@@ -26,10 +26,10 @@ def test_book_list_contains_all_books(page: Page):
         'Dragons in a Bag'
         ]
     expected_authors = [
-        'Julia Donaldson',
-        'Andrea Beaty',
-        'Kelly Barnhill',
-        'Zetta Elliott'
+        'by Julia Donaldson',
+        'by Andrea Beaty',
+        'by Kelly Barnhill',
+        'by Zetta Elliott'
         ]
 
     actual_titles = titles.all_inner_texts()

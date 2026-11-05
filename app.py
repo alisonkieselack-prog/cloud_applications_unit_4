@@ -8,6 +8,9 @@ from authenticated import *
 from login_required import *
 from flagsmith import Flagsmith
 import os
+from dotenv import load_dotenv
+
+load_dotenv()
 
 flagsmith = Flagsmith(
     environment_key = os.getenv("FLAGSMITH_KEY")
