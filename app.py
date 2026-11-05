@@ -161,6 +161,14 @@ def get_quotes():
 def get_quoteshtml():
     return render_template("quotes.html")
 
+@app.route('/books/<int:book_id>', methods=['GET'])
+def get_individual_book(book_id):
+    connection = DatabaseConnection()
+    connection.connect()
+    book_repo = BookRepository(connection)
+    book = book_repo.find(book_id)
+    return render_template('book.html', book=book)
+
 # make the server run in response to `python app.py`
 # on port 5001 (you'll learn more about what this means later)
 # and use debug mode so that changing code restarts the app

@@ -210,43 +210,50 @@ body:has(main ul) main {
 }
 
 /* Main book list */
-body:has(main ul) main > ul {
-    list-style: none;
-    margin: 0;
-    padding: 0;
+
+.books {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
 }
 
-.book_item {
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  height: 200px;
-  width: auto;
-}
-
-.book_item h2 {
-  font-size: medium;
-  color: #427255;
-  margin: 0 auto;
+.book_item a {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 25px;
+    text-decoration: none;
 }
 
 .book_item img {
-  border: #294936 12px solid;
-  height: 75%;
-  width: auto;
+    border: #294936 3px solid;
+    border-radius: 3px;
+    width: 150px;
+    height: auto;
+}
+
+.book_info {
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
+    gap: 10px;
+}
+
+.book_item h2 {
+    font-size: 1.1rem;
+    color: #427255;
+    margin: 0;
+    line-height: 1.2;
 }
 
 .book_item p {
-  line-height: 1.2;
-  color: #769170;
-  margin: 0 auto;
+    font-size: 1.1rem;
+    line-height: 1.2;
+    color: #769170;
+    margin: 0;
 }
 
-.books {
-  display: grid;
-  grid: 200px / 50% 50%;
-  gap: 50px;
-}
+/* alerts */
 
 .alert-success {
     background-color: #d4edda;
